@@ -3,7 +3,7 @@ public class RandsomNote {
 
 	public static void main(String[] args) {
 		// Testing 
-		System.out.println(canConstruct("aa", "aab"));
+		System.out.println(canConstruct("a", "b"));
 	}
 	
 	private static boolean canConstruct(String ransomNote, String magazine) {
@@ -17,12 +17,8 @@ public class RandsomNote {
 		
 		// Decrement the value in index of the randsomenote
 		for (int i = 0; i < ransomNote.length(); i++) {
-			alphabets[ransomNote.charAt(i)-'a']--;
-		}
-		
-		// If the characters are not present in the magazine, index value will be less than 0 
-		for (int i = 0; i < alphabets.length; i++) {
-			if(alphabets[i] < 0)
+			// If the characters are not present in the magazine, index value will be less than 0 
+			if(--(alphabets[ransomNote.charAt(i)-'a']) < 0)
 				return false;
 		}
 		
