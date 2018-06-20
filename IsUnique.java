@@ -30,5 +30,26 @@ public class IsUnique {
 		
 		return true;
 	}
+	
+	// valid for string with a-z or A-Z
+	// Use a checker to store ascii value of character 
+	// by bit manipulation - Intereting Approach
+	public static boolean logicalApproach(String s) {
+		
+		int checker = 0;
+		
+		for (int i = 0; i < s.length(); i++) {
+			int index = s.charAt(i) - 'a';
+			
+			if((checker & (1<<index)) > 0)
+				return false;
+			
+			checker = checker | (1<<index);
+			
+		}
+		
+		return true;
+ 
+	}
 
 }
