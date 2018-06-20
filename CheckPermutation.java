@@ -1,6 +1,5 @@
 /*Check Permutation: Given two strings, write a method to decide if one is a permutation of the other*/
 import java.util.Arrays;
-import java.util.Iterator;
 
 public class CheckPermutation {
 
@@ -29,6 +28,7 @@ public class CheckPermutation {
 	}
 	
 	
+	// Check the permuation using the arrays of size 128 (ascii characters)xxx
 	public static boolean checkUsingArrays(String stringOne, String stringTwo) {
 		
 		int[] asciiArray = new int[128];
