@@ -1,30 +1,53 @@
-//
+//https://leetcode.com/problems/reverse-string/description/
 public class ReverseString {
 
 	public static void main(String[] args) {
-		String s = "Let's take LeetCode contest";
-		// Testing
-		System.out.println(reverse(s));
+		String s = "This is Manoj Kumar";
+
+		
 	}
-
-
-	// https://leetcode.com/problems/reverse-string/description/
-	private static String reverse(String s) {
+	/*private static String reverse(String s) {
 		char[] charArray = s.toCharArray();
+		
+		charArray = reverse(charArray);
+		
+		s =new String(charArray);
+		
+		StringBuilder stringBuilder = new StringBuilder();
+		int start=0, end = 0; 
+
+		while(end < s.length()) {
+			
+			if(charArray[end] != ' ') {
+				System.out.println(" Charcter are "+charArray[end]);
+				end++;
+			}
+			else {
+				System.out.println("Start "+start + " End "+end);
+				System.out.println(new String(charArray, start, end));
+				end++;
+				start = end;
+			}
+		}
+		
+		return s;
+		
+	}*/
+	
+	private static char[] reverse(char[] sArray) {
+		
 		int start = 0;
-		int end = charArray.length - 1;
-
-		// Swap the char till the index hits the middle
-		while (start < end) {
-			char temp = charArray[start];
-			charArray[start] = charArray[end];
-			charArray[end] = temp;
-
+		int end = sArray.length-1;
+		
+		while(start < end) {
+			char temp = sArray[start];
+			sArray[start] = sArray[end];
+			sArray[end] = temp;
 			start++;
 			end--;
 		}
-
-		return new String(charArray);
+		
+		return sArray;
 	}
 	
 }
