@@ -1,52 +1,65 @@
-// Check weather a pattern P is a substring in another string R
-public class StringMatching {
+// Trie Implementation 
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Set;
 
-	public static void main(String[] args) {
-		String T = "AAAAAAAAAAAAAAAAAA";
-		String P = "AAAAA";
+public class StringMatching {
+	private TrieNode root;
+	
+	public void insert(String str) {
+		TrieNode current = root;
 		
-		example(P.toCharArray(), T.toCharArray());
+		for(int i =0; i<str.length(); i++) {
+			char ch = str.charAt(i);
+			Set<Character> charsCurrent = current.children.keySet();
+			
+			if(!charsCurrent.contains(ch)) {
+				current.children.put(ch, new TrieNode());
+			}
+			current = current.children.get(ch);
+		}
+		current.isWord = true;
 	}
 	
-	// Brute Force Method
-	public static boolean bruteForcePatternCheck(char[] P, char[] T) {
+	public boolean search(String word) {
+		TrieNode current = root;
 		
-		String p = new String(P);
-		boolean flag = false;
-		// Loop to consider the substring in T of length P
-		// Slide this window till the end
-		for (int i = 0; i <= T.length-P.length; i++) {
-			String t = new String(T, i, P.length);
+		for (int i = 0; i < word.length(); i++) {
 			
-			// check if the T substring and p are equal
-			if(t.equals(p)) {
-				System.out.println("Pattern found at index "+i);
-				flag = true;
+			char ch = word.charAt(i);
+			Set<Character> charsCurrent = current.children.keySet();
+			if(charsCurrent.contains(ch)) {
+				current = current.children.get(ch);
+			}
+			else {
+				return false;
 			}
 		}
-		return flag;
-	}
-	// Brute Force method, using characters only
-	public static void bruteForce(char[] P , char[] T) {
 		
-		// Sliding window of size P
-		for (int i = 0; i <= (T.length-P.length); i++) {
-			int pIndex = 0;
-			boolean flag = false;
-			while(pIndex != P.length) {
-				if(T[i+pIndex] != P[pIndex]) {
-					break;
-				}
-				// Keep track of found
-				if(pIndex == P.length-1)
-					flag = true;
-				
-				pIndex++;
-			}
-			
-			if(flag)
-				System.out.println("Patern was found at "+i+ " index");
-			
-		}		
+		return current.isWord;
 	}
+	
+	
+	
+	public static void main(String[] args) {
+		StringMatching stringMatching= new StringMatching();
+		stringMatching.root = new TrieNode();
+		stringMatching.insert("ManojKumar");
+		stringMatching.insert("Kumar");
+		
+		System.out.println(stringMatching.search("ManojKu"));
+		System.out.println(stringMatching.search("Divya"));
+	}
+	
+}
+
+class TrieNode {
+	boolean isWord;
+	Map<Character, TrieNode> children;
+	
+	public TrieNode() {
+		children = new HashMap<>();
+		isWord = false;
+	}
+	
 }
