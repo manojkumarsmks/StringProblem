@@ -2,52 +2,46 @@
 public class ReverseString {
 
 	public static void main(String[] args) {
-		String s = "This is Manoj Kumar";
-
+		String s = "the sky is blue";
+		System.out.println(reverse(s));
 		
 	}
-	/*private static String reverse(String s) {
-		char[] charArray = s.toCharArray();
+	private static String reverse(String s) { 
+		int startPointer = 0, endPointer = s.length()-1;
+		char[] sArray = s.toCharArray();
+		while(startPointer < endPointer) {
+			char temp = sArray[startPointer];
+			sArray[startPointer] = sArray[endPointer];
+			sArray[endPointer] = temp;
+			startPointer++;
+			endPointer--;
+ 		}
+		startPointer = 0; endPointer = 0;
 		
-		charArray = reverse(charArray);
-		
-		s =new String(charArray);
-		
-		StringBuilder stringBuilder = new StringBuilder();
-		int start=0, end = 0; 
-
-		while(end < s.length()) {
+		while(true) {
 			
-			if(charArray[end] != ' ') {
-				System.out.println(" Charcter are "+charArray[end]);
-				end++;
+			if(sArray[endPointer] == ' ' || endPointer == sArray.length-1) {
+				int tempEnd = endPointer;
+				if(endPointer != sArray.length-1)
+					endPointer--;
+				
+				while(startPointer < endPointer) {
+					char temp = sArray[startPointer];
+					sArray[startPointer] = sArray[endPointer];
+					sArray[endPointer] = temp;
+					startPointer++;
+					endPointer--;
+		 		}
+				startPointer = tempEnd+1;
+				endPointer = tempEnd;
 			}
-			else {
-				System.out.println("Start "+start + " End "+end);
-				System.out.println(new String(charArray, start, end));
-				end++;
-				start = end;
-			}
+
+			if(endPointer == sArray.length-1)
+				break;
+			endPointer++;
+			
 		}
-		
-		return s;
-		
-	}*/
-	
-	private static char[] reverse(char[] sArray) {
-		
-		int start = 0;
-		int end = sArray.length-1;
-		
-		while(start < end) {
-			char temp = sArray[start];
-			sArray[start] = sArray[end];
-			sArray[end] = temp;
-			start++;
-			end--;
-		}
-		
-		return sArray;
+		return new String(sArray);
 	}
 	
 }
