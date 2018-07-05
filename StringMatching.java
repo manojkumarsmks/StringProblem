@@ -1,10 +1,12 @@
 // Trie Implementation 
+import java.util.Collection;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.Map;
 import java.util.Set;
 
 public class StringMatching {
-	private TrieNode root;
+	private  TrieNode root;
 	
 	public void insert(String str) {
 		TrieNode current = root;
@@ -19,6 +21,27 @@ public class StringMatching {
 			current = current.children.get(ch);
 		}
 		current.isWord = true;
+	}
+	
+	// https://leetcode.com/problems/longest-common-prefix/description/
+
+	public int LongestCommonPrefix() {
+		TrieNode current = root;
+		int counter = 0;
+		
+		while(true) {
+			Set <Character> keys = current.children.keySet();
+			if(keys.size() != 1 )
+				break;
+			else {
+				counter++;
+				current = current.children.get(keys.iterator().next());
+			}
+		}
+		
+		return counter;
+
+		
 	}
 	
 	public boolean search(String word) {
@@ -38,19 +61,17 @@ public class StringMatching {
 		
 		return current.isWord;
 	}
-	
-	
-	
+
 	public static void main(String[] args) {
 		StringMatching stringMatching= new StringMatching();
 		stringMatching.root = new TrieNode();
-		stringMatching.insert("ManojKumar");
-		stringMatching.insert("Kumar");
 		
-		System.out.println(stringMatching.search("ManojKu"));
-		System.out.println(stringMatching.search("Divya"));
+		String[] strs =  {"dog","racecar","car"};
+		for(String s:strs) {
+			stringMatching.insert(s);
+		}
+		System.out.println(strs[0].substring(0, stringMatching.LongestCommonPrefix()));
 	}
-	
 }
 
 class TrieNode {
@@ -61,5 +82,4 @@ class TrieNode {
 		children = new HashMap<>();
 		isWord = false;
 	}
-	
 }
